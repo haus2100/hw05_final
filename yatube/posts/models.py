@@ -36,7 +36,7 @@ class Post(models.Model):
         'Картинка',
         upload_to='posts/',
         blank=True
-    ) 
+    )
 
     class Meta:
         ordering = ('-pub_date',)
@@ -45,6 +45,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.text
+
 
 class Comment(models.Model):
     post = models.ForeignKey(
@@ -69,6 +70,7 @@ class Comment(models.Model):
 
     def __str__(self) -> str:
         return self.text
+
 
 class Follow(models.Model):
     user = models.ForeignKey(
