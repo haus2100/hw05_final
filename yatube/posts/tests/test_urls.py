@@ -86,7 +86,7 @@ class PostURLTest(TestCase):
             f'/posts/{self.post.id}/': HTTPStatus.OK.value,
             '/create/': HTTPStatus.FOUND,
             f'/posts/{self.post.id}/edit/': HTTPStatus.FOUND,
-            f'/follow/': HTTPStatus.FOUND,
+            '/follow/': HTTPStatus.FOUND,
         }
         for adress, expected in urls.items():
             with self.subTest(adress=adress):
