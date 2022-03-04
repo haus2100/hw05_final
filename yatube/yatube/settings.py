@@ -25,7 +25,7 @@ SECRET_KEY = 'zdfsy_y((6215pj_-)5_q&$sdj-8=s0%j5j^lg0nuia@wux*cx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*' ,]
+ALLOWED_HOSTS = ['*', ]
 
 
 # Application definition
