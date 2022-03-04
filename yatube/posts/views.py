@@ -55,9 +55,7 @@ def post_detail(request, post_id):
     comment_form = CommentForm(request.POST or None)
     comments = post.comments.all()
     post_count = post.author.posts.all().count()
-    title = f'Пост {post.text[:30]}'
     context = {
-        'title': title,
         'post_count': post_count,
         'post': post,
         'comment_form': comment_form,
@@ -113,12 +111,9 @@ def add_comment(request, post_id):
 
 
 @login_required
-def follow_index(request):
+def follow_index(request,):
     posts = Post.objects.filter(author__following__user=request.user)
-    paginator = Paginator(posts, settings.FILL)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    context = {"page_obj": page_obj}
+    context = get_page_context(posts, request)
     return render(request, "posts/follow.html", context)
 
 

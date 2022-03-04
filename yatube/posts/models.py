@@ -35,7 +35,8 @@ class Post(models.Model):
     image = models.ImageField(
         'Картинка',
         upload_to='posts/',
-        blank=True
+        blank=True,
+        null=True,
     )
 
     class Meta:
@@ -87,8 +88,11 @@ class Follow(models.Model):
     )
 
     class Meta:
-        default_related_name = 'follow'
-        verbose_name_plural = 'Подписки'
+        models.UniqueConstraint(
+            fields=['user', 'author'],
+            name='unique_following'
+        )
+        
 
     def __str__(self) -> str:
         return self.user.username

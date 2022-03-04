@@ -7,9 +7,7 @@
 <div class="row">
     <aside class="col-12 col-md-3">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            Дата публикации: {{ post.pub_date|date:"d E Y" }}
-        </li>
+        {% include 'includes/author_&_date_pub.html' %}
         {% if post.group %}
             <li class="list-group-item">
                 Группа {{ post.group.title }}
@@ -18,9 +16,6 @@
                 </a>
             </li>
         {% endif %} 
-          <li class="list-group-item">
-            Автор: {{ post.author.get_full_name }}
-          </li>
           <li class="list-group-item d-flex justify-content-between align-items-center">
           Всего постов автора:  {{ posts_count }}
           </li>
@@ -43,35 +38,7 @@
             редактировать запись
         </a>  
       {% endif %}
-      {% if user.is_authenticated %}
-        <div class="card my-4">
-          <h5 class="card-header">Добавить комментарий:</h5>
-          <div class="card-body">
-            <form method="post" action="{% url 'posts:add_comment' post.id %}">
-              {% csrf_token %}   
-              <div class="form-group mb-2">
-                <textarea name="text" cols="40" rows="10" class="form-control" required id="id_text">
-                </textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Отправить</button>
-            </form>
-          </div>
-        </div>
-      {% endif %}
-      {% for comment in comments %}
-        <div class="media mb-4">
-          <div class="media-body">
-            <h5 class="mt-0">
-              <a href="{% url 'posts:profile' post.author.username %}">
-                {{ comment.author }}
-              </a>
-            </h5>
-            <p>
-              {{ comment.text }}
-            </p>
-          </div>
-        {% endfor %}
-      </div>
+      {% include 'includes/coment.html' %}
     </article>
 </div> 
 {% endblock content %}

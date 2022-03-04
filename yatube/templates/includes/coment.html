@@ -1,0 +1,29 @@
+{% if user.is_authenticated %}
+    <div class="card my-4">
+        <h5 class="card-header">Добавить комментарий:</h5>
+        <div class="card-body">
+         <form method="post" action="{% url 'posts:add_comment' post.id %}">
+            {% csrf_token %}   
+            <div class="form-group mb-2">
+            <textarea name="text" cols="40" rows="10" class="form-control" required id="id_text">
+            </textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+        </div>
+    </div>
+{% endif %}
+    {% for comment in comments %}
+    <div class="media mb-4">
+        <div class="media-body">
+        <h5 class="mt-0">
+            <a href="{% url 'posts:profile' post.author.username %}">
+            {{ comment.author }}
+            </a>
+        </h5>
+        <p>
+            {{ comment.text }}
+        </p>
+        </div>
+    </div>
+    {% endfor %}

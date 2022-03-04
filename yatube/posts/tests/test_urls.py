@@ -41,6 +41,9 @@ class PostURLTest(TestCase):
             f'/posts/{cls.post.id}/': 'posts/post_detail.html',
             '/create/': 'posts/create_post.html',
             f'/posts/{cls.post.id}/edit/': 'posts/create_post.html',
+            '/follow/': 'posts/follow.html',
+            f'/profile/{cls.user.username}/follow/': 'posts/profile.html',
+            f'/profile/{cls.user.username}/unfollow/': 'posts/profile.html',
         }
 
     def test_urls_uses_correct_template(self):
@@ -65,6 +68,7 @@ class PostURLTest(TestCase):
             f'/posts/{self.post.id}/',
             '/create/',
             f'/posts/{self.post.id}/edit/',
+            '/follow/',
         }
         for adress in urls:
             with self.subTest(adress=adress):
@@ -82,6 +86,7 @@ class PostURLTest(TestCase):
             f'/posts/{self.post.id}/': HTTPStatus.OK.value,
             '/create/': HTTPStatus.FOUND,
             f'/posts/{self.post.id}/edit/': HTTPStatus.FOUND,
+            f'/follow/': HTTPStatus.FOUND,
         }
         for adress, expected in urls.items():
             with self.subTest(adress=adress):
